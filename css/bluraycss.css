@@ -1,0 +1,201 @@
+.remarque {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 12pt;
+	font-style: italic;
+	line-height: 20pt;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	color: #33FFFF;
+	background-attachment: fixed;
+	background-color: #003399;
+	background-position: center center;
+	letter-spacing: normal;
+	vertical-align: middle;
+	border: thin groove #33FF66;
+}
+
+.emphase {
+	font-style : bold;
+	font-size : 14pt;
+}
+
+body {
+	background-image: url(ressources/blu-ray.png);
+}
+h1 {
+	color: #66CCFF;
+	background-color: #0000FF;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+h2 {
+	color: #FFFFFF;
+	border-bottom : medium groove;
+	border-bottom-color : inherit;
+	font-style : italic;
+	font-weight : bold;
+	outline-color : inherit;
+	background-image : none;
+	background-color : Teal;
+
+}
+
+h2.danger {
+	background-color : #FF0000;
+}
+
+
+table.blueTable {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  border: 1px solid #1C6EA4;
+  background-color: #EEEEEE;
+  width: 100%;
+  text-align: left;
+}
+table.blueTable td {
+  border: 1px solid #AAAAAA;
+  padding: 3px 2px;
+}
+table.blueTable tbody td {
+  font-size: 13px;
+}
+table.blueTable tr:nth-child(even) {
+  background: #D0E4F5;
+}
+table.blueTable th {
+  background: #1C6EA4;
+  background: -moz-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+  background: -webkit-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+  background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+  font-size: 15px;
+  font-weight: bold;
+  color: #FFFFFF;
+  text-align: center;
+  border-left: 2px solid #D0E4F5;
+}
+table.blueTable thead th:first-child {
+  border-left: none;
+}
+
+table.blueTable tfoot {
+  font-size: 14px;
+  font-weight: bold;
+  color: #FFFFFF;
+  background: #D0E4F5;
+}
+table.blueTable tfoot td {
+  font-size: 14px;
+}
+table.blueTable tfoot .links {
+  text-align: right;
+}
+table.blueTable tfoot .links a{
+  display: inline-block;
+  background: #1C6EA4;
+  color: #FFFFFF;
+  padding: 2px 8px;
+  border-radius: 5px;
+}
+
+div {
+-webkit-border-radius: 20px;
+-moz-border-radius: 20px;
+border-radius: 20px;
+-webkit-box-shadow: 9px 9px 13px #4169E1;
+-moz-box-shadow: 9px 9px 13px #4169E1;
+box-shadow: 9px 9px 13px #4169E1;
+text-shadow: -1px -1px 0px #000000;
+background-image: -moz-linear-gradient(left, #FFF8DC, #87CEEB 68%);
+background-image: -webkit-gradient(linear, left top, right top, color-stop(0.00, #FFF8DC), color-stop(0.68, #87CEEB));
+border: 2px solid #4169E1;
+background-color: #FFFFFF;
+padding: 10px;
+font-family: Verdana, Geneva, sans-serif;
+font-size: 12pt;
+color: #888888;
+text-align: center;
+outline: 0px solid #FFFFFF;
+outline-offset: 20px;
+}
+
+div.container {
+	width: 90%;
+	margin : 0 auto;
+}
+
+div.scrollable {
+	width: 97%;
+    overflow-Y: auto;
+    margin: 0px;
+    padding-left:10px;
+    text-align: justify;
+}
+
+div.loginbox {
+	width:40%;
+	padding:2px;
+	margin:2px;
+	display: inline-block;
+	border-radius:8px;
+	float:right;
+	overflow:auto;
+}
+
+h2.loginbox {
+	margin-top:0px;
+	margin-bottom:opx;
+	padding-top:0px;
+	padding-bottom:0px;
+	border-radius:10px;
+}
+
+h2.compact {
+	margin-top:0px;
+	margin-bottom:opx;
+	padding-top:0px;
+	padding-bottom:0px;
+	border-radius:10px;
+}
+
+p.stats {
+	display: inline-block;
+	text-align:left;
+	padding:10px;
+	margin-top:0px;
+	margin-bottom:0px;
+	margin-left:10px;
+	margin-right:10px;
+	background-color:#CFF;
+}
+
+nav ul {
+	padding:0px;
+	margin-bottom:10px;
+	list-style-type:none;	 
+}
+
+nav li {
+	display:inline-block;
+	padding:5px;
+	margin:5px;
+	width:auto;
+	height:auto;
+	border:1px solid #06F;
+	border-radius:5px;
+	text-align:center;
+	line-height:auto;
+	background-color: #ade5f5;
+}
+
+nav li a {
+	display:block;
+	text-decoration:none;
+	color:#009;
+}
+
+nav li :hover {
+	background-color:#3CC;
+}
+

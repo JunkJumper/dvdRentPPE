@@ -1,0 +1,94 @@
+<?php
+if(isset($_SESSION['Authenticated']))
+	{
+	// une session est active
+	// recherche des statistiques du membre connecté : Nb de bluray offerts, prêtés, empruntés
+	if($_SESSION['Authenticated']['mode']=="administrateur")
+		{ // l'utilisateur connecté a les privilèges "Administrateur"
+		    echo '<H2 class="loginbox"> Tâches d\'administration du site </H2>';
+		  // menu des tâches d'administration
+			echo "<nav>";
+			echo '<ul>
+						<li> Ajouter un nouveau Disque </li>
+						<li> Recherches IMDB </li>
+						<li><a href="gestretours.php"> Prêts en cours, Retours </a></li>
+						<li><a href="inscription.php"> Inscrire un Membre</a></li>			
+				</ul>';
+			echo "</nav>";
+		}
+ 	// c'est un membre (admin ou pas), afficher ses statistiques
+		// stats propriétaire
+		require "includes/connectbdd.php";
+		$sqlreq = 'SELECT IDproprio, count(IDfilm)AS NBfilms, SUM(preter)AS PourPRET, 
+		sum(echanger)AS PourECHANGE, count(vendre) AS PourVENDRE, sum(vendre)AS PrixTOTAL 
+		FROM offrir WHERE IDproprio ='.$_SESSION['Authenticated']['monID'].' ;';
+		$res=$connexion->query($sqlreq) or die('Echec de la requête stats propriétaire');
+		$stats=$res->fetch_array();
+		echo '<H2 class="compact"> Statistiques pour le membre : '.$_SESSION['Authenticated']['login'].'</H2>';
+		echo '<p class="stats">';
+		echo 'Vous possédez <strong>'.$stats['NBfilms'].'</strong> Disques BluRay, Dont ...<br>';
+		echo '... '.$stats['PourPRET'].' sont mis à disposition pour prêt<br>';
+		echo '... '.$stats['PourECHANGE'].' sont proposés pour échange, et ...<br>';
+		$prix=$stats['PrixTOTAL'];
+		if($stats['PourVENDRE']==0){$prix=0;}
+		echo '... '.$stats['PourVENDRE'].' sont à vendre, pour un total de '.$prix.' Euros';
+		mysqli_free_result($res);
+		// nombre de prêts en cours
+		$sqlreq2 = 'SELECT Count(*) AS NBDiscs FROM emprunter
+		WHERE date_rendu IS NULL AND IDemprunteur = '.$_SESSION['Authenticated']['monID'].' ; ';
+		$res=$connexion->query($sqlreq2) or die('Echec de la requête nombre BluRays empruntés');
+		echo "<br>";
+		$nbemprunts = $res->fetch_array();
+		echo ' Prêts de BluRays En Cours : <strong>'.$nbemprunts['NBDiscs'].'</strong>';
+		mysqli_free_result($res);
+		// nombre de prêts depuis le début
+		$sqlreq3 = 'SELECT Count(*) AS NBDiscs FROM emprunter
+		WHERE IDemprunteur = '.$_SESSION['Authenticated']['monID'].' ; ';
+		$res=$connexion->query($sqlreq3) or die('Echec de la requête nombre total de BluRays empruntés');
+		echo "<br>";
+		$totalemprunts = $res->fetch_array();
+		echo ' BluRays Empruntés depuis le début : <strong>'.$totalemprunts['NBDiscs'].'</strong>';
+		echo "</p>";
+		mysqli_free_result($res);
+		// stats emprunteur 
+		$sqlquery ='SELECT t_films.ID_film, t_films.Titre,
+		DATEDIFF(DATE(NOW()),emprunter.date_due)AS RETARD 
+		FROM `emprunter` INNER JOIN t_films on emprunter.IDfilm = t_films.ID_film 
+		WHERE date_rendu IS NULL AND date_due < DATE(NOW()) AND IDemprunteur = '.$_SESSION['Authenticated']['monID'].' ;';
+		$res=$connexion->query($sqlquery) or die('Echec de la requête stats emprunteur');
+		if($res->num_rows>0)
+			{	
+				echo '<div class="loginbox">';
+				echo '<h2 class="loginbox" style="background-color:#ff0000"> !!! '.$res->num_rows.' Prêts en RETARD !!! </h2>';
+				echo '<table class="blueTable">';
+				echo "<tr><th>N°</th><th>Titre du Film</th><th>Retard</th></tr>";
+				while ($data = mysqli_fetch_array($res)) 
+					{
+						// on affiche les films en retard
+						$leFilm =$data['ID_film'];
+						echo '<tr>
+							<td><a href="fichefilm.php?ID='.$leFilm.'">'.$leFilm.'</a></td>';
+						echo '<td>'.$data['Titre'].'</td>';
+						echo '<td>'.$data['RETARD'].' Jours</td></tr>';
+					}
+				echo "</table>";
+			}
+		else
+			{
+				echo '<p class="stats" style="background-color:#00FCCF">';
+				echo " Vous n'avez pas de prêt en retard ";
+				echo "</p>";
+			}
+		echo '</div>';
+		mysqli_close($connexion);
+		}
+else
+	{
+	// en l'absence de session ouverte
+	echo "
+	<H1>Projet SI6 : Club d'échange BluRays</H1>
+	<H2> BTS SIO Lycée Honoré d'Estienne d'Orves </H2>
+	<h3>Copyright Gilles G. CASANOVA</h3>
+	";
+	}
+?>

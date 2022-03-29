@@ -1,0 +1,109 @@
+@charset "utf-8";
+
+/* ImageFlow Settings
+==================================== */
+@media screen, projection {
+	.imageflow {
+		overflow:hidden;
+		position:relative; 
+		text-align:left;
+		visibility:hidden;
+		width:96%;
+	}
+	.imageflow img {
+		border:none;
+		position:absolute;
+		top:0px;
+		visibility:hidden;
+		-ms-interpolation-mode:bicubic; 
+		/* Enables bicubic image resampling for the IE7 */
+	}
+	.imageflow p {
+		margin:0 auto;
+		text-align:center;
+	}
+	.imageflow .loading {
+		border:1px solid white;
+		height:15px;
+		left:50%;
+		margin-left:-106px;
+		padding:5px;
+		position:relative;
+		visibility:visible;
+		width:200px;
+	}
+	.imageflow .loading_bar {
+		background:#fff;
+		height:10px;
+		visibility:visible;
+		width:1%;
+	}
+	.imageflow .navigation{
+		overflow: hidden;
+		position:relative;
+		border-radius: 15px;
+		background-color:#039;
+		max-height:150px;
+
+	}
+	.imageflow .caption {
+		font-weight:bold;
+		font-size:x-large;
+		border-radius:10px;
+		position:relative;
+		text-align:center;
+		padding-bottom:3px;
+		z-index:10001;
+	}
+	.imageflow .scrollbar {
+		height:3px;
+		padding:0;
+		position:relative; 
+		visibility:visible;
+		z-index:10002;
+		
+	}
+	.imageflow .slider {
+		background:url(ressources/slider.png) no-repeat;
+		height:8px;
+		margin:-6px 0 0 -7px;
+		position:absolute;
+		width:5px;
+		z-index:10003;
+	}
+	.imageflow .slideshow {
+		cursor:pointer;
+		height:10px;
+		margin:20px 0 0 20px;
+		position:absolute;
+		width:10px;
+		z-index:10003;
+	}
+	.imageflow .slideshow.pause {
+		background:url(ressources/button_pause.png) no-repeat;
+	}
+	.imageflow .slideshow.play {
+		background:url(ressources/button_play.png) no-repeat;
+	}
+	.imageflow .images {
+		overflow:hidden;
+		white-space:nowrap;
+	}
+	.imageflow .button {
+		cursor:pointer;
+		height:17px;
+		position:relative;
+		width:17px;
+		padding:2px;
+	}
+	.imageflow .previous {
+		background: url(ressources/button_left.png) top left no-repeat;
+		float:left;
+		margin: -7px 0 0 -30px;
+	}
+	.imageflow .next {
+		background: url(ressources/button_right.png) top left no-repeat;
+		float:right;	
+		margin:-7px -30px 0 30px;
+	}
+}

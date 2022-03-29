@@ -1,0 +1,21 @@
+<nav> <!-- partie HTML de la barre de navigation -->
+	<ul>
+      <li><a href="index.php"> Accueil </a></li>
+      <?php // variante visiteur ou membre connecté
+	  if(ISSET($_SESSION['Authenticated']['login'])){
+	  echo '<li><a href="editprofil.php">Modifier mon profil</a></li>';
+	  }
+	  else {
+	  echo '<li><a href="inscription.php">Inscription au Club</a></li>';
+	  }
+	  ?>
+      <div>
+          <li><a href="listefilms.php"> Bandes Annonces </a></li>
+          <li><a href="fichefilm.php"> par IDfilm </a></li>   
+          <li><a href="findidrange.php"> par IDmin à ID max </a></li>
+          <li><a href="findbyname.php"> sur le Titre </a></li>
+          <li><a href="catalogue.php"> Médiathèque (coverflow) </a></li>
+      </div>
+	  
+    </ul>
+</nav>
