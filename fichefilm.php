@@ -41,7 +41,7 @@ else
 				$filmid = $_GET['ID'];  // 
 				// echo $filmid;
 				require "includes/connectbdd.php";
-				$query="SELECT ID_film, Titre, Réalisateur, Année, Miniature, Resume 
+				$query="SELECT ID_film, Titre, Réalisateur, Année, Miniature, Resume, URL_BA 
 				FROM t_films LEFT JOIN resumerfilm ON (t_films.ID_film = resumerfilm.﻿ID_film)
 				WHERE t_films.ID_film=".$filmid;
 				// echo $query;
@@ -53,24 +53,36 @@ else
 								echo '<h2 class="danger">Vous devez être connecté·e pour emprunter ce film !</h2>';
 							}
 						}
-						echo "<H1>Fiche du film N°".$filmid." :</H1>";
-						echo '<table class="blueTable"><TR><TH>ID</TH>
-						<TH>Titre</TH><TH>Réalisateur</TH><TH>Année</TH><TH>Miniature</TH><TH>Resume</TH></TR>';
 						$fiche = $result->fetch_array();
-						
-							// préparation pour insertion de la miniature
-							$urlmini = str_replace('\\', '/', $fiche['Miniature']);
-							// message si absence de résumé
-							if (empty($fiche['Resume']))$fiche['Resume']="<p>le résumé pour ce film reste à saisir</p>";
-							echo "<TR><TD>".$fiche['ID_film']."</TD>
-							<TD>".$fiche['Titre']."</TD>
-							<TD>".$fiche['Réalisateur']."</TD>
-							<TD>".$fiche['Année']."</TD>
-							<TD><img src=\"".$urlmini."\" height=\"250px\"> </TD>
-							<TD><div style=\"width:95%;height:250px;overflow-Y:auto;margin:5px;
-							padding:3px;text-align:justify\">".$fiche['Resume']."</div></TD>
-							</TR>";
-							echo "</table><br>";
+
+						if(isset($_GET['ba'])) { //pour affichage de la BA
+							echo '<iframe width="420" height="315"'
+									.'src="http://www.youtube.com/embed/' .$_GET['ba'] .'" frameborder="0" allowfullscreen>'
+								.'</iframe>'
+								.'<br />'
+								.'<nav><ul><li><a href="fichefilm.php?ID='.$filmid.'">Revenir sur la fiche du film</a></li></ul></nav>';
+								
+						} else { //pour affichage du petit tableau
+							echo "<H1>Fiche du film N°".$filmid." :</H1>";
+							echo '<table class="blueTable"><TR><TH>ID</TH>
+							<TH>Titre</TH><TH>Réalisateur</TH><TH>Année</TH><TH>Miniature</TH><TH>Resume</TH></TR>';
+							
+								// préparation pour insertion de la miniature
+								$urlmini = str_replace('\\', '/', $fiche['Miniature']);
+								// message si absence de résumé
+								if (empty($fiche['Resume']))$fiche['Resume']="<p>le résumé pour ce film reste à saisir</p>";
+								echo "<TR><TD>".$fiche['ID_film']."</TD>
+								<TD>".$fiche['Titre']."</TD>
+								<TD>".$fiche['Réalisateur']."</TD>
+								<TD>".$fiche['Année']."</TD>
+								<TD><img src=\"".$urlmini."\" height=\"250px\"> </TD>
+								<TD><div style=\"width:95%;height:250px;overflow-Y:auto;margin:5px;
+								padding:3px;text-align:justify\">".$fiche['Resume']."</div></TD>
+								</TR>";
+								echo "</table><br>";
+						}
+
+
 							// déterminer les actions possibles sur ce film (prêt, échange, vente)
 							$sqlstatus = 'SELECT * FROM offrir WHERE IDfilm = "'.$fiche['ID_film'].'";';
 							$result2 = $connexion->query($sqlstatus);
@@ -90,8 +102,11 @@ else
 							// insérer ici la liste des actions
 							// les actions seront actives ou pas selon les disponibilités du bluray à l'emprunt, l'échange ou la vente.
 							// actions Fixes
-							echo '<ul>
-							<li><a href="longfichfilm.php?ID='.$filmid.'"> Fiche Détaillée </a></li>
+							echo '<ul>';
+							if(isset($fiche['URL_BA'])) {
+								echo '<li><a href="fichefilm.php?ID='.$filmid .'&ba=' .explode("watch?v=", $fiche['URL_BA'])[1] .'"> Bande Annonce </a></li>';
+							}
+							echo '<li><a href="longfichfilm.php?ID='.$filmid.'"> Fiche Détaillée </a></li>
 							<li><a href="casting.php?ID='.$filmid.'"> Casting </a></li>';
 							// actions conditionnées
 							if(!is_null($filmStatus['echanger']))

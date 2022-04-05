@@ -10,7 +10,6 @@
 	  }
 	  ?>
       <div>
-          <li><a href="listefilms.php"> Bandes Annonces </a></li>
           <li><a href="fichefilm.php"> par IDfilm </a></li>   
           <li><a href="findidrange.php"> par IDmin à ID max </a></li>
           <li><a href="findbyname.php"> sur le Titre </a></li>

@@ -15,10 +15,10 @@
   <?php require "includes/sidebar1.ssi"; //ajoute le menu de navigation ?>   
   </div>
   <div class="content">
-  <H1> Bivenvenue sur notre site de partage de Films sur BluRay </H1>
+  <H1> Bienvenue sur notre site de partage de Films sur BluRay </H1>
   <H2> Présentation</H2>
   <p align="justify">Ce site est créé pour et par une communauté de passionés de disques BluRay.
-  Il recense tous les disques BluRay possédés par nos membres, et permet de connaître pour chacun de cs films de nombreuses informations, généralement extraites de bases de données publiques (OMDB, IMDB ... ) ou complétées par nos membres.
+  Il recense tous les disques BluRay possédés par nos membres, et permet de connaître pour chacun de ces films de nombreuses informations, généralement extraites de bases de données publiques (OMDB, IMDB ... ) ou complétées par nos membres.
   </p>  
   <H2> Règles de fonctionnement</H2>
   <p align="justify">La consultation des fiches de tous les films du club, le visionnage des bandes annonces et les filmogaphies des acteurs sont ouvertes à tous publics. Les BluRay présents dans nore base appartiennent à nos membres, qui peuvent les emprunter, les échanger ou les vendre à travers le site.
